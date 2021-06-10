@@ -1,46 +1,70 @@
 import './App.css';
 import React,  { useState, Fragment } from 'react' ;
+import Header from './Components/Header'
+
 const initialState =[
-  {name : 'Shaivy' , position :2 },
-  {name : 'Sachin' , position :78 },
-  {name : 'Kevin' , position :99 },
-  {name : 'Arushi' , position :40 },
-  {name : 'Rajvi' , position :30 },
-  {name : 'Avinash' , position :9 },
-  {name : 'Ingrid' , position :5 },
-  {name : 'Tanisha' , position :89 },
-  {name : 'Tianna' , position :100},
-  {name : 'Swasti' , position :78 },
-  {name : 'Prashant' , position :45 },
+  {id:1, name : 'Shaivy' , position :2 },
+  {id:2, name : 'Sachin' , position :78 },
+  {id:3, name : 'Kevin' , position :99 },
+  {id:4, name : 'Arushi' , position :40 },
+  {id:5, name : 'Rajvi' , position :30 },
+  {id:6, name : 'Avinash' , position :9 },
+  {id:7, name : 'Ingrid' , position :5 },
+  {id:8, name : 'Tanisha' , position :89 },
+  {id:9, name : 'Tianna' , position :100},
+  {id:10, name : 'Swasti' , position :78 },
+  {id:11, name : 'Prashant' , position :45 },
   
 
 ]
 
 function App() {
 
+
   const [rankings, setRankings] = useState(initialState)
-  const [fav, SetFav] = useState('Sachin')
+  const [fav, SetFav] = useState('No one selected yet')
+  const [clicks, setClicks] = useState(0)
 
-  function moveUp() {
+  function moveUp(name, pos) {
     // do some thing here 
+      let newRank = rankings.map(i=>{
+        if(i.name === name) {
+          return {...i,position:pos-1}
+        }
+        return i
+      })
+      setRankings(newRank);
   }
 
-  function moveDown() {
+  function moveDown(name, pos) {
     // do some thing here 
+    let newRank = rankings.map(i=>{
+      if(i.name === name) {
+        return {...i,position:pos+1}
+      }
+      return i
+    })
+    setRankings(newRank);
+}
+
+  
+
+  function changeFavorite(name) {
+   setClicks(clicks+1);
+    SetFav(name);
   }
 
-  function changeFavorite() {
-    // do some thing here 
-  }
-
+  //ReactDOM.render(changeFavorite(), `Currently your favorite person is ${fav}`)
+  
+ 
 
 const showRankings =rankings
 .sort((a,b)=> a.position - b.position)
-.map(i=>{
+.map((i, idx, arr)=>{
 return (<div style={{margin:"10px"}}>
  {i.name} {" "}
- <button onClick={()=>moveUp()}>Move Up </button>{" "}
- <button onClick={()=>moveUp()}> Move Down </button>{" "}
+ <button onClick={()=>moveUp(i.name, arr[idx-1].position)}>Move Up </button>&nbsp;
+ <button onClick={()=>moveDown(i.name, arr[idx+1].position)}> Move Down </button>&nbsp;
 </div>)
 })
 
@@ -48,11 +72,15 @@ const favs =rankings
 .map(i=>{
 return (<div style={{margin:"10px"}}>
  {i.name} {" "}
- <button onClick={()=>changeFavorite()}>{`Click Here to make ${i.name} your Favorite`}</button>{" "}
+ <button disabled={clicks===3}
+ onClick={()=>changeFavorite(i.name)}>{`Click Here to make ${i.name} your Favorite`}</button>{" "}
 </div>)
 })
 
 return (
+
+
+  
 <div style={{margin:"10vw", padding:"20px"}}>
 <h2>Who in the class speaks the most other , Top speakers go on top</h2> 
 {showRankings}
