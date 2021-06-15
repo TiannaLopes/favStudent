@@ -2,6 +2,7 @@ import './App.css';
 import React,  { useState, Fragment } from 'react' ;
 import Header from './Components/Header'
 
+
 const initialState =[
   {id:1, name : 'Shaivy' , position :2 },
   {id:2, name : 'Sachin' , position :78 },
@@ -12,7 +13,7 @@ const initialState =[
   {id:7, name : 'Ingrid' , position :5 },
   {id:8, name : 'Tanisha' , position :89 },
   {id:9, name : 'Tianna' , position :100},
-  {id:10, name : 'Swasti' , position :78 },
+  {id:10, name : 'Swasti' , position :77 },
   {id:11, name : 'Prashant' , position :45 },
   
 
@@ -23,7 +24,7 @@ function App() {
 
   const [rankings, setRankings] = useState(initialState)
   const [fav, SetFav] = useState('No one selected yet')
-  const [clicks, setClicks] = useState(0)
+  const [clicks, setClicks] = useState(()=>10 * 0)
 
   function moveUp(name, pos) {
     // do some thing here 

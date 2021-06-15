@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App.jsx';
+//import App from './src/App.jsx';
 import reportWebVitals from './reportWebVitals';
+import Scores from './Components';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Scores/>
+    {/* <Router>
+      <Routing />
+    </Router> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
