@@ -7,8 +7,8 @@ import EditForm from './EditForm'
 import { createPortal } from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import AppBar from './AppBar'
-import Drawer from './Drawer'
 import axios from 'axios'
+import NavBar from '../Components/NavBar/NavBar';
 
 
 const Scores = () => {
@@ -36,16 +36,16 @@ const Scores = () => {
         <div className="container">
 
         <Route path='/' />
-        <Drawer>
+        <NavBar>
         
         
         <MainTable 
         data={data} 
         setData={setData}
          handleEdit={handleEdit}/>  
-    </Drawer>
+    </NavBar>
     
-       <InputForm
+       {/* <InputForm
         setData={setData}
          data ={data}/>
 
@@ -53,7 +53,7 @@ const Scores = () => {
          data ={data} 
          setData={setData} 
          selectedRow={selectedRow} 
-         setSelectedRow={setSelectedRow}/>
+         setSelectedRow={setSelectedRow}/> */}
 
 
     </div>

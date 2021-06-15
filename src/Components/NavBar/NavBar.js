@@ -17,6 +17,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import {
+  Switch,
+  Route,
+  Redirect,
+  useHistory
+} from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -83,6 +90,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MiniDrawer(props) {
+  const history= useHistory()
+console.log(props.children ,'props.children')
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -117,7 +126,7 @@ export default function MiniDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-          Student Learning Management System 
+            Student Learning Management System ( LMS )
           </Typography>
         </Toolbar>
       </AppBar>
@@ -144,19 +153,16 @@ export default function MiniDrawer(props) {
           {['Main Page', 'Create New Form'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text}/>
             </ListItem>
           ))}
         </List>
         <Divider />
-      
+       
       </Drawer>
       <main className={classes.content}>
-        {/* <div className={classes.toolbar} /> */}
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
-            {props.children}
-        </main>
+        <div className={classes.toolbar} />
+      {props.children}
       </main>
     </div>
   );
